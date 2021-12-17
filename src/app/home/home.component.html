@@ -1,0 +1,128 @@
+<div class="container">
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Authors</th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor="let book of display_content;let indexOfelement=index;">
+      <td>{{book.id}}</td>
+      <td>{{book.title}}</td>
+      <td><span *ngFor="let author of book.authors">{{author.name}},</span></td>
+      <td><div style="display: flex;justify-content: space-between;"><button (click)=delete(indexOfelement)>Delete</button><button (click)="edit(indexOfelement)">Edit</button></div></td>
+    </tr>
+    
+  </table>
+  <div style="display: flex;justify-content: space-between;"><button (click)="prev()">prev</button><button (click)="add()">add</button><button (click)="next()">next</button></div>
+</div>
+
+<div id="myModal" class="modal" [ngClass]="{'disp': modal_disp,'ndisp':!modal_disp}">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="close()">&times;</span>
+    <form
+      
+      name="form"
+      (ngSubmit)="onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="username">ID</label>
+        <input
+          type="text"
+          class="form-control"
+          name="Id"
+          [(ngModel)]="form.id"
+          required
+          #Id="ngModel"
+        />
+        
+      </div>
+      <div class="form-group">
+        <label for="password">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          name="Title"
+          [(ngModel)]="form.title"
+          required
+          
+          #Title="ngModel"
+        />
+        
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">
+          Submit
+        </button>
+      </div>
+      
+    </form>
+  </div>
+
+</div>
+
+<div id="myModal" class="modal" [ngClass]="{'disp': modal_disp_add,'ndisp':!modal_disp_add}">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="close()">&times;</span>
+    <form
+      
+      name="form_add"
+      (ngSubmit)="onSubmitAdd()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="username">ID</label>
+        <input
+          type="number"
+          class="form-control"
+          name="Id"
+          [(ngModel)]="form_add.id"
+          required
+          #Id="ngModel"
+        />
+        
+      </div>
+      <div class="form-group">
+        <label for="password">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          name="Title"
+          [(ngModel)]="form_add.title"
+          required
+          
+          #Title="ngModel"
+        />
+        
+      </div>
+      <div class="form-group">
+        <label for="password">Author</label>
+        <input
+          type="text"
+          class="form-control"
+          name="Author"
+          [(ngModel)]="form_add.author"
+          required
+          
+          #Author="ngModel"
+        />
+        
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">
+          Submit
+        </button>
+      </div>
+      
+    </form>
+  </div>
+
+</div>
+
