@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BooklistService } from  '../booklist.service';
 import { LoginService } from '../login.service';
+import {Router} from "@angular/router"
 
 
 @Component({
@@ -20,17 +21,17 @@ export class HomeComponent implements OnInit {
   active_object:any;
   add_form:any;
   modal_disp_add=false;
-  constructor(private bookService: BooklistService ,private route: ActivatedRoute, private loginService:LoginService) { }
+  constructor(private bookService: BooklistService ,private route: Router, private loginService:LoginService) { }
 
   ngOnInit(): void {
     if(! window.sessionStorage.getItem('logged_in_name')){
-      window.location.href=window.location.href.split('//')[0]+'//'+window.location.href.split('//')[1].split('/')[0]+'/'+window.location.href.split('//')[1].split('/')[1]+"/login";
+      this.route.navigate(['/login']);
     }
     else{
       this.loginService.loggedIn=true;
     }
     
-    const routeParams = this.route.snapshot.paramMap;
+    //const routeParams = this.route.snapshot.paramMap;
     var pageFromRoute:string;
     this.page_no=0;
     this.fetch_page_no=1;

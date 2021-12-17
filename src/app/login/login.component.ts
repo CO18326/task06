@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { LoginService } from '../login.service';
 
+import {Router} from "@angular/router"
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private loginservice:LoginService) { }
+  constructor(private loginservice:LoginService,private route:Router ) { }
 
   ngOnInit(): void {
     
@@ -29,7 +31,7 @@ export class LoginComponent implements OnInit {
       this.isLoginFailed=false;
       this.isLoggedIn=true;
       this.roles=["test-user"];
-      window.location.href=window.location.href.split('//')[0]+'//'+window.location.href.split('//')[1].split('/')[0]+'/'+window.location.href.split('//')[1].split('/')[1]+"/home";
+      this.route.navigate(['/home']);
       window.sessionStorage.setItem('logged_in_name', 'test');
       this.loginservice.loggedIn=true;
     }

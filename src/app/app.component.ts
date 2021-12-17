@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { LoginService } from './login.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
   //isLoggedIn = false;
   
 
-  constructor(public loginservice:LoginService) { }
+  constructor(public loginservice:LoginService,private route:Router) { }
 
   ngOnInit(): void {
     if(! window.sessionStorage.getItem('logged_in_name')){
@@ -27,7 +28,7 @@ export class AppComponent {
   logout(): void {
     window.sessionStorage.removeItem('logged_in_name');
     this.loginservice.loggedIn=false;
-
-    window.location.href=window.location.href.split('//')[0]+'//'+window.location.href.split('//')[1].split('/')[0]+'/'+window.location.href.split('//')[1].split('/')[1]+"/login";
+    this.route.navigate(['/login']);
+    
   }
 }

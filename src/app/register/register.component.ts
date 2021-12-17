@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'app-register',
@@ -15,8 +15,7 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
-
-  constructor() { }
+  constructor(private route:Router) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +23,6 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     const { username, email, password } = this.form;
     alert("registeration done !");
-    window.location.href=window.location.href.split('//')[0]+'//'+window.location.href.split('//')[1].split('/')[0]+'/'+window.location.href.split('//')[1].split('/')[1]+"/login";
-  }
+    this.route.navigate(['/login']);
+  } 
 }
